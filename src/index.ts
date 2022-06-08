@@ -1,2 +1,5 @@
 import './ts/app';
-import './sass/style.sass'
+import 'bootstrap';
+
+import './sass/style.sass';
+import 'bootstrap/dist/css/bootstrap.min.css'
