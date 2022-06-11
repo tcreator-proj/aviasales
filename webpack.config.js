@@ -2,6 +2,7 @@
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { type } = require('os');
 
 module.exports = {
   devServer: {
@@ -44,7 +45,10 @@ module.exports = {
         test: /\.(sass|css)$/,
         use: [{
           // вставить CSS на страницу
-          loader: 'style-loader'
+          loader: 'style-loader',
+          // options: {
+          //   injectType: "linkTag" 
+          // }
         }, {
           // переводит CSS в модули CommonJS
           loader: 'css-loader'
