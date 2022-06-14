@@ -42,36 +42,24 @@ module.exports = {
         ],
       },
       {
-        test: /\.(sass|css)$/,
-        use: [{
-          // вставить CSS на страницу
-          loader: 'style-loader',
-          // options: {
-          //   injectType: "linkTag" 
-          // }
-        }, {
-          // переводит CSS в модули CommonJS
-          loader: 'css-loader'
-        }, {
-          // Выполнить действия postcss
-          loader: 'postcss-loader',
-          options: {
-            // `postcssOptions` требуется для postcss 8.x;
-            // если Вы используете postcss 7.x пропустите ключ
-            postcssOptions: {
-              // плагины postcss, можно экспортировать в postcss.config.js
-              plugins: function () {
-                return [
-                  require('autoprefixer')
-                ];
-              }
-            }
-          }
-        }, {
-          // компилирует Sass в CSS
-          loader: 'sass-loader'
-        }]
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
       },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          // fallback to style-loader in development
+          process.env.NODE_ENV !== "production"
+            ? "style-loader"
+            : MiniCssExtractPlugin.loader,
+          "css-loader",
+          "sass-loader",
+        ],
+      },
+      {
+        test: /\.svg$/,
+        loader: 'svg-inline-loader'
+      }, 
       {
         test: /\.(png|jpg|gif)$/i,
         use: [
